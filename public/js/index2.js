@@ -19,4 +19,4 @@ const config = {
   options: {},
 };
 
-const myChart = new Chart(document.getElementById('myChart'), config);
+const myChart = new chart.Chart(document.getElementById('myChart'), config);
