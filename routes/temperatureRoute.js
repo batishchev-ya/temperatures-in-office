@@ -4,6 +4,9 @@ const temperatureControler = require('../controlers/temperatureControler');
 const router = express.Router();
 
 router.route('/').get(temperatureControler.getAllTemperatures);
+router
+  .route('/daily-temperatures')
+  .get(temperatureControler.getDailyTemperatures);
 //   .post(temperatureControler.createTemperatureManualy);
 
 // router

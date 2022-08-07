@@ -13,7 +13,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'models')));
 
-app.get('/', viewRoute);
+app.use('/', viewRoute);
 
 app.get('/greetings', (req, res) => {
   res.status(200).json({
