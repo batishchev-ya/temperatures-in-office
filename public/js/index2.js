@@ -61,16 +61,10 @@ for (let i = 0; i < dailyTemperatures.length; i++) {
   dates.push(dailyTemperatures[i].createdAt);
 }
 
-console.log(new Date().getUTCHours());
-console.log(new Date().getUTCMinutes());
-console.log(new Date().getUTCSeconds());
+// console.log(new Date().getUTCHours());
+// console.log(new Date().getUTCMinutes());
+// console.log(new Date().getUTCSeconds());
 const currentTime = new Date().toUTCString();
-// const startTime =
-//   currentTime.getHours() +
-//   ':' +
-//   currentTime.getMinutes() +
-//   ':' +
-//   currentTime.getSeconds();
 const startTime = currentTime;
 const labels = dates;
 
