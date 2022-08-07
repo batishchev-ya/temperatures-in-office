@@ -14,6 +14,42 @@ const getDailyTemperatures = async () => {
     console.log(err);
   }
 };
+
+const renderChart = (options) => {
+  const canvasId = options.canvasId;
+  const labels = options.labels;
+  const dataSet = options.dataSet;
+  const lineColour = options.lineColour;
+  const header = options.header;
+
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        label: header,
+        backgroundColor: lineColour,
+        borderColor: lineColour,
+        data: dataSet,
+      },
+    ],
+  };
+
+  const config = {
+    type: 'line',
+    data: data,
+    options: {
+      scales: {
+        y: {
+          min: Math.min.apply(null, dataSet) - 1,
+          max: Math.max.apply(null, dataSet) + 1,
+        },
+      },
+    },
+  };
+
+  const chart = new Chart(document.getElementById(canvasId), config);
+};
+
 const dailyTemperatures = await getDailyTemperatures();
 // console.log(dailyTemperatures);
 let temperature = [];
@@ -38,56 +74,20 @@ const currentTime = new Date().toUTCString();
 const startTime = currentTime;
 const labels = dates;
 
-const data = {
-  labels: labels,
-  datasets: [
-    {
-      label: 'Temperatures in Office',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: temperature,
-    },
-  ],
+const optionsTemperatures = {
+  canvasId: 'myChart',
+  labels: dates,
+  dataSet: temperature,
+  lineColour: 'rgb(255, 99, 132)',
+  header: 'Temperatures in Office',
 };
+renderChart(optionsTemperatures);
 
-const config = {
-  type: 'line',
-  data: data,
-  options: {
-    scales: {
-      y: {
-        min: Math.min.apply(null, temperature) - 1,
-        max: Math.max.apply(null, temperature) + 1,
-      },
-    },
-  },
+const optionsHumidity = {
+  canvasId: 'myChart2',
+  labels: dates,
+  dataSet: humidity,
+  lineColour: 'rgb(255, 99, 50)',
+  header: 'Humidity in Office',
 };
-
-const myChart = new Chart(document.getElementById('myChart'), config);
-
-const data2 = {
-  labels: labels,
-  datasets: [
-    {
-      label: 'Humidity in Office',
-      backgroundColor: 'rgb(255, 99, 50)',
-      borderColor: 'rgb(255, 99, 50)',
-      data: humidity,
-    },
-  ],
-};
-
-const config2 = {
-  type: 'line',
-  data: data2,
-  options: {
-    scales: {
-      y: {
-        min: Math.min.apply(null, humidity) - 1,
-        max: Math.max.apply(null, humidity) + 1,
-      },
-    },
-  },
-};
-
-const myChart2 = new Chart(document.getElementById('myChart2'), config2);
+renderChart(optionsHumidity);
