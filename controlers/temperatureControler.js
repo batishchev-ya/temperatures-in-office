@@ -17,7 +17,6 @@ exports.getDailyTemperatures = async (req, res) => {
     },
   });
 
-  // res.locals.dailyTemperatures = dailyTemperatures;
   res.status(200).json({
     status: 'success',
     dailyTemperatures,
